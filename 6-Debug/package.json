@@ -1,13 +1,12 @@
 {
-  "name": "nodejs-complete-guide",
+  "name": "6-debug",
   "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "start-server": "node app.js"
+    "start": "nodemon app.js"
   },
-  "author": "Mufil Rahman A",
+  "author": "mufil rahman",
   "license": "ISC"
 }
