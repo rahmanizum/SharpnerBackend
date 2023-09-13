@@ -31,15 +31,19 @@
                 </form>
                 <div class="container-sm mt-4 d-none" id="msgDiv">
                     <table class="table table-info text-center">
-                        <thead>
-                            <tr>
-                                <td colspan="2"><h4>Your Message</h4></td>
+                        <thead >
+                            <tr class="table-dark">
+                                <th colspan="2"><h4>Your Message</h4></th>
+                            </tr>
+                            <tr  class="table-primary">
+                                <th>Name</th>
+                                <th>Message</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Name: {{Name}}</td>
-                                <td>Message: {{userMsg}}</td>
+                                <td>{{Name}}</td>
+                                <td>{{userMsg}}</td>
                             </tr>
                         </tbody>
                     </table>
