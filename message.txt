@@ -1,2 +1,0 @@
-userName=mufil&message=
-userName=mufil&userMsg=hi
