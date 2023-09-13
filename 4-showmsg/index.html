@@ -29,7 +29,7 @@
                         <input type="submit" class="btn btn-primary" value="Submit" id="submitBtn">
                     </div>                
                 </form>
-                <div class="container-sm mt-4" id="msgDiv">
+                <div class="container-sm mt-4 d-none" id="msgDiv">
                     <table class="table table-info text-center">
                         <thead>
                             <tr>
@@ -48,5 +48,13 @@
         </div>
     </div>
 </body>
+<script>
+    const submitBtn = document.querySelector('#submitBtn');
+    const msgDiv = document.querySelector('#msgDiv');
+    submitBtn.addEventListener('click',onSubmit);
+    function onSubmit(e){
+        msgDiv.className = 'd-block'         
+    }
 
+</script>
 </html>
