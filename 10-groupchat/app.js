@@ -5,30 +5,33 @@ const app = express();
 app.use(express.urlencoded({extended:false}))
 
 app.use('/login',(request,response,next)=>{
-    response.send('<form action="/" method="post"><input type="post" placeholder="Enter your Name" name = "userName"> <button> Submit</button> </form>');
+    response.send(`<form onsubmit="localStorage.setItem('userName',document.getElementById('userName').value)" action="/" method="get">
+    <input type="text" placeholder="Enter your Name" name = "userName" id ="userName" >
+    <button type="submit"> Add</button>
+</form>`);
 });
 
+app.get('/',(request,response,next)=>{
+    response.send(
+        `<form onsubmit="document.getElementById('userName').value = localStorage.getItem('userName')" action="/" method="post">
+    <input type="text" placeholder="Enter your message" name = "message" required>
+    <input  name = "userName" id ="userName" type="hidden" >
+    <button type="submit"> Add</button>
+</form>`  
+    )
+})
 app.post('/',(request,response,next)=>{
     console.log(request.body);
 const {message,userName} = request.body;
-if(message&& userName)fs.appendFileSync('chatHistory.txt',`${userName}:${message}\n`);
+fs.appendFileSync('chatHistory.txt',`${userName}:${message}\n`);
 const chatData = fs.readFileSync('chatHistory.txt','utf8')
 response.send(`
 <p>${chatData}</p>
-<form action="/" method="post" id="chatForm"><input type="text" placeholder="Your Message" name = "message"> <button> Send</button>  </form>
-<script>
-localStorage.setItem('userName', '${userName}');
-const userName = localStorage.getItem('userName');
-console.log(userName);
-if (userName) {
-  const form = document.getElementById('chatForm');
-  const userNameInput = document.createElement('input');
-  userNameInput.type = 'hidden';
-  userNameInput.name = 'userName';
-  userNameInput.value = userName;
-  form.appendChild(userNameInput);
-}
-</script>
+<form onsubmit="document.getElementById('userName').value = localStorage.getItem('userName')" action="/" method="post">
+    <input type="text" placeholder="Enter your message" name = "message" required >
+    <input name = "userName" id ="userName" type="hidden" >
+    <button type="submit"> Add</button>
+</form>
 
 `)
 })
