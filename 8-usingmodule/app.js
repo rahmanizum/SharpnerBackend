@@ -16,9 +16,10 @@ app.post('/add-product',(request, response, next) => {
 //DEFINE A ROUTE FOR THE /product PATH
 app.post('/product',(request,response,next)=>{
     //get body to pass to browser
-    console.log(request.body);
-    // Send a response just for /product incoming requests
-    response.send('<h1>This is cart page </h1>')
+    const addproduct = request.body;
+    console.log(addproduct);
+    // Send a response just for /product incoming requests with product name
+    response.send(`<h1>This is cart page </h1><h3>1. ${addproduct.product}</h3>`)
 })
 //DEFINE A DEFAULT ROUTE FOR THE ROOT PATH '/'
 app.use('/',(request,response,next)=>{
