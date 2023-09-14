@@ -2,3 +2,5 @@ book,15
 table,25
 table,3
 book,3
+table,23
+Mobile,23

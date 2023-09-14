@@ -6,13 +6,13 @@ const fs = require('fs');
 const router = express.Router();
 
 //DEFINE A ROUTE FOR THE /add-product PATH
-router.use('/add-product',(request, response, next) => {
+router.get('/add-product',(request, response, next) => {
     // Send a response form for all incoming requests
     response.send('<form action="/product" method="post"><input type="text" name="product" placeholder="Product Name"><input type="number" name="product" placeholder="Product Size"><button>Add product</submit></form> ');
 })
 
 //DEFINE A ROUTE FOR THE /product PATH
-router.use('/product',(request,response,next)=>{
+router.post('/product',(request,response,next)=>{
     const body = request.body;
     fs.appendFile('productData.txt',`${body.product}\n`,(err)=>{
         if(err) console.log(err);
