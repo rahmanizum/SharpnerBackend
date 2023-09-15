@@ -1,5 +1,6 @@
 // IMPORT EXPRESS 
 const express = require('express');
+const path = require('path');
 
 //IMPORT LOCAL MODULES
 const AdminRouter = require('./routes/admin');
@@ -10,6 +11,10 @@ const app = express();
 
 //CREATE A MIDDLE WARE DOING PARSING 
 app.use(express.urlencoded({extended:false}));
+
+//CREATE A STATIC MIDDLE WARE TO ACCESS PUBLIC FOLDER
+app.use(express.static(path.join(__dirname,'public')));
+// app.use(express.static(__dirname + '/public'));
 
 //CREATE A MIDDLE WARE FOR ADMIN
 app.use('/admin',AdminRouter);
