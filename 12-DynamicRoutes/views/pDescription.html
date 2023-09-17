@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Listing</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="container-sm mt-5">
+        <div class="card">
+            <div class="card-header text-bg-primary text-center pt-3 pb-3">
+                <h2>{{pName}}</h2>
+            </div>
+            <div class="card-body">
+                <div class="text-center">
+                    <h3>Description</h3>
+                    <p>{{pDescription}}</p>
+                </div>
+                <div class="text-center text-bg-secondary p-2 rounded-4 m-5">
+                    <h4>No of items Available = {{pQuantity}} </h4>
+
+                </div>    
+                <div class="text-center m-2">
+                    <a href="#" class="btn btn-outline-success m-2">Add to cart </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!-- Add Bootstrap JS and Popper.js links (for Bootstrap components) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
