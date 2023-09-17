@@ -6,7 +6,7 @@ const AdminRouter = require('./routes/admin');
 const shopRouter = require('./routes/shop');
 
 //IMPORT MAIN PAGE CONROLLER 
-const mainPagecontroler = require('./controllers/manPage');
+const mainPagecontroler = require('./controllers/mainPage');
 
 //CREATE AN INSTANCE OF THE EXPRESS APPLICATION
 const app = express();

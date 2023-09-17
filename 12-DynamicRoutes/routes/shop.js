@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 //IMPORT MAINPAGE CONTROLLER 
-const mainPagecontroler = require('../controllers/manPage')
+const mainPagecontroler = require('../controllers/mainPage')
 const productController = require('../controllers/products')
 
 //CREATE AN INSTANCE OF Router
