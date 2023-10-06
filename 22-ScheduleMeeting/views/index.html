@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Meet</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body class="text-bg-warning bg-opacity-25">
+    <!-- Nav bar -->
+    <nav class="nav navbar navbar-expand-lg text-bg-danger col-12">
+        <div class="container text-black p-3">
+            <h2>Schedule Your Meeting</h2>
+            <a class="navbar-brand" href="#"><i class="fab fa-laravel"></i></a>
+        </div>
+    </nav>
+    <div class="container-fluid row d-flex justify-content-around mt-3">
+        <div class="container col-md-5 mt-3" id="slotPlaceholder">
+            <!-- <div class="col-md-8 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center m-2">
+                            <p>2:00 PM</p>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#schedule-form1"><span class="text-success">4 Slots Available</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center m-2">
+                            <p>2:00 PM</p>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#schedule-form2"><span class="text-success">4 Slots Available</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="col-md-7 mt-3 collapse" id="schedule-form1">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Submit Form </h3>
+                </div>
+                <div class="card-body ps-4">
+                    <form action="/user/schedule-meeting/1" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mt-3 collapse" id="schedule-form2">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Submit Form </h3>
+                </div>
+                <div class="card-body ps-4">
+                    <form action="/user/schedule-meeting/2" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mt-3 collapse" id="schedule-form3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Submit Form </h3>
+                </div>
+                <div class="card-body ps-4">
+                    <form action="/user/schedule-meeting/3" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-7 mt-3 collapse" id="schedule-form4">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h3>Submit Form </h3>
+                </div>
+                <div class="card-body ps-4">
+                    <form action="/user/schedule-meeting/4" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" name="Name" placeholder="Enter your name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="Enter your email" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Book</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class=" container-fluid row mt-4" id="detailsPlaceholder">
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-header bg-warning text-center">
+                        <h4>Hi Mufil,</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center m-2">
+                            <p class="fs-5">Please Join the meeting via this <a href="https://meet.google.com/abc-defg-hij">Join Google Meet</a> at 2:00 PM
+                                    Using <a href="mailto:youremail@example.com">youremail@example.com</a>
+                                </p>
+                            <button class="btn btn-outline-danger m-2 r-btn" id="">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-3 mb-4">
+                <div class="card">
+                    <div class="card-header bg-warning text-center">
+                        <h4>Hi Mufil </h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="text-center m-2">
+                            <p class="fs-5">Please Join the meeting via this <a href="https://meet.google.com/abc-defg-hij">Join Google Meet</a> at 2:00 PM
+                                    Using <a href="mailto:ramanizum@gmail.com">ramanizum@gmail.com</a>
+                                </p>
+                            <button class="btn btn-outline-danger m-2 r-btn" id="18">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+        <div class=" p-5"></div>
+        <footer class="bg-light py-4 fixed-bottom">
+            <!-- Footer Content Here -->
+            <div class="container text-center">
+                <p>&copy; 2023 Mufil PvtLtd. All rights reserved.</p>
+            </div>
+        </footer>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+<script src="/js/main.js"></script>
+
+</html>
