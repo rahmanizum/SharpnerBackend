@@ -13,7 +13,11 @@ const userRoute = require('./routes/user');
 
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods:['GET','POST'],
+
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
