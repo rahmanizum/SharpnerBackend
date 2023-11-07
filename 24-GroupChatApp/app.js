@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const sequelize = require('./util/database');
 const User = require('./models/users');
 const Forgotpasswords = require('./models/forgot-password');
+const ChatHistory = require('./models/chat-history');
 
 
 const maninRoute = require('./routes/home');
@@ -28,6 +29,8 @@ app.use(maninRoute)
 
 User.hasMany(Forgotpasswords);
 Forgotpasswords.belongsTo(User,{constraints:true,onDelete:'CASCADE'});
+User.hasMany(ChatHistory)
+ChatHistory.belongsTo(User, { constraints: true });
 
 
 

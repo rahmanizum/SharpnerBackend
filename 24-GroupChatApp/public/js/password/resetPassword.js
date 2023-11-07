@@ -1,4 +1,4 @@
-import helperFunctions from "/js/helperFunctions.mjs";
+import helperFunctions from "/js/password/helperFunctions.mjs";
 const parts = window.location.href.split('/'); 
 const lastPart = parts[parts.length - 1];
 

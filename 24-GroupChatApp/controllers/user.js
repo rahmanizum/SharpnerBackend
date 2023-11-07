@@ -1,4 +1,5 @@
 const User = require('../models/users');
+const ChatHistory = require('../models/chat-history')
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -50,4 +51,60 @@ exports.userSignin = async (request, response, next) => {
     } catch (error) {
         console.log(error);
     }
+}
+
+exports.saveChatHistory = async(request,response,next) => {
+    try {
+        const user = request.user;
+        const {message}=request.body;
+        await user.createChatHistory({
+            message
+        })
+        return response.status(200).json({ message: "Message saved to database succesfully" })
+        
+    } catch (error) {
+        return response.status(500).json({ message: 'Internal Server error!' })
+    }
+}
+
+exports.getUserChatHistory = async (request,response,next) => {
+    try {
+        const user=request.user;
+        const chatHistories=await user.getChatHistories();
+        return response.status(200).json({chat:chatHistories,message:"User chat History Fetched"})
+        
+    } catch (error) {
+        return response.status(500).json({ message: 'Internal Server error!' })  
+    }
+}
+exports.getAllChatHistory = async (request,response,next) => {
+    try {
+        const chatHistories=await ChatHistory.findAll({
+            include: [
+              {
+                model: User, 
+                attibutes:['name','date_time'] 
+              }
+            ],
+            order: [['date_time', 'ASC']],
+          });
+          const chats = chatHistories.map((ele)=>{
+            const user = ele.User;
+            return{
+                message:ele.message,
+                name:user.name,
+                userId:user.id,
+                date_time:ele.date_time
+            }
+          })
+        return response.status(200).json({chats,message:"User chat History Fetched"})
+        
+    } catch (error) {
+        console.log(error);
+        return response.status(500).json({ message: 'Internal Server error!' })  
+    }
+}
+exports.getcurrentuser = async (request, response, next) => {
+    const user = request.user;
+    response.json({userId:user.id});
 }
