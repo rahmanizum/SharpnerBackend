@@ -4,3 +4,6 @@ exports.getHomepage = (request,response,next)=>{
 exports.getErrorpage = (request,response,next)=>{
     response.sendFile('notfound.html',{root:'views'});
 }
+exports.getMainpage = (request,response,next)=>{
+    response.sendFile('main.html',{root:'views'});
+}
