@@ -79,11 +79,13 @@ exports.getUserChatHistory = async (request,response,next) => {
 }
 exports.getAllChatHistory = async (request,response,next) => {
     try {
+        const lastMessageId = request.query.lastMessageId||0;
         const chatHistories=await ChatHistory.findAll({
+            offset:Number(lastMessageId),
             include: [
               {
                 model: User, 
-                attibutes:['name','date_time'] 
+                attibutes:['id','name','date_time'] 
               }
             ],
             order: [['date_time', 'ASC']],
@@ -91,6 +93,7 @@ exports.getAllChatHistory = async (request,response,next) => {
           const chats = chatHistories.map((ele)=>{
             const user = ele.User;
             return{
+                messageId:ele.id,
                 message:ele.message,
                 name:user.name,
                 userId:user.id,
