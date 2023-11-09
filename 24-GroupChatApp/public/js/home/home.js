@@ -23,6 +23,7 @@ async function on_Signup(e) {
                     name: signupElements.name.value,
                     email: signupElements.email.value,
                     phonenumber: signupElements.phoneNo.value,
+                    imageUrl:Math.floor(Math.random() * 1000),
                     password: signupElements.password1.value
                 }
                await axios.post("user/signup", data);

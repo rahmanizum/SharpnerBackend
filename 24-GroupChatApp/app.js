@@ -7,7 +7,8 @@ const sequelize = require('./util/database');
 const User = require('./models/users');
 const Forgotpasswords = require('./models/forgot-password');
 const ChatHistory = require('./models/chat-history');
-
+const Groups = require("./models/groups");
+const GroupMember = require('./models/group-members');
 
 const maninRoute = require('./routes/home');
 const userRoute = require('./routes/user');
@@ -31,8 +32,10 @@ User.hasMany(Forgotpasswords);
 Forgotpasswords.belongsTo(User,{constraints:true,onDelete:'CASCADE'});
 User.hasMany(ChatHistory)
 ChatHistory.belongsTo(User, { constraints: true });
-
-
+User.belongsToMany(Groups, { through: GroupMember });
+Groups.belongsToMany(User, { through: GroupMember });
+Groups.hasMany(ChatHistory);
+ChatHistory.belongsTo(Groups);
 
 const PORT = process.env.PORT;
 async function initiate() {

@@ -25,3 +25,12 @@
         background: #666;
         /* Change the color on hover if desired */
     }
+
+    .chat-class{
+        max-width: 90%;
+        background-color: rgb(130, 247, 247);
+    }
+    .self-chat-class{
+        max-width: 90%;
+        background-color: rgb(186, 201, 201); 
+    }
