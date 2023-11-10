@@ -34,6 +34,7 @@ User.hasMany(ChatHistory)
 ChatHistory.belongsTo(User, { constraints: true });
 User.belongsToMany(Groups, { through: GroupMember });
 Groups.belongsToMany(User, { through: GroupMember });
+Groups.belongsTo(User,{foreignKey: 'AdminId',constraints:true,onDelete:'CASCADE'})
 Groups.hasMany(ChatHistory);
 ChatHistory.belongsTo(Groups);
 

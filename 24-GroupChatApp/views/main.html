@@ -59,13 +59,15 @@
 
         </div>
         <div class="col col-lg-9  position-relative pe-0" style="min-height: 85vh;">
-            <div class="container mt-4 p-0">
+            <div class="container mt-4 p-0" id="group_headContainer">
                 <div
                     class="w-100 d-flex align-items-center justify-content-between border border-opacity-10 p-2 mb-2 rounded-2 bg-secondary-subtle">
                     <img src="https://picsum.photos/seed/common/200" alt="Profile Picture" class="rounded-circle"
                         style="width: 50px; height: 50px;" id="group_img">
                     <h3><strong class="mb-1" id="group_heading">Common Group</strong></h3>
-                    <small id="group_members" data-toggle="tooltip" data-bs-placement="left" title="All Members can access this !" >All Members</small>
+                    <small id="group_members" data-toggle="tooltip" data-bs-placement="left" title="All Members can access this group !" >All Members</small>
+                    <input type="submit" class="btn btn-primary  d-none" data-bs-toggle="modal"
+                    data-bs-target="#create_group_model"  value=&#9998; id="0">
                 </div>
                 <div class="card overflow-y-scroll " style="height: 67vh;" id="chat-container">
                     <div class="card-body flex-grow-0 container row pe-0" id="chat_body">
@@ -87,24 +89,23 @@
 
     </section>
     <!--Models-->
-    <div class="modal fade " id="create_group_model">
+    <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="create_group_model">
         <div class="modal-dialog modal-dialog-centered ">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create new group </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-header d-flex justify-content-center">
+                    <h1 class="modal-title fs-5" id="model_heading">Create new group </h1>
                 </div>
                 <div class="modal-body">
                     <form id="create_group_form">
                         <div class="mb3">
-                            <label for="members" class="col-form-label">Group Name:</label>
-                            <input type="text" class="form-control" placeholder="Eg:Family Group etc" id="group_name"
+                            <label for="members" class="col-form-label" >Group Name:</label>
+                            <input type="text" class="form-control" placeholder="Eg:Family Group etc" name="group_name" id="group_name"
                                 required>
 
                         </div>
                         <div class="mb-3">
                             <label for="members" class="col-form-label">Group Members:</label>
-                            <input type="text" class="form-control" placeholder="Search..." id="search_bar">
+                            <input type="text" class="form-control" name="search_bar" placeholder="Search..." id="search_bar">
 
                             <div class="card mt-2 d-none">
                                 <ul class="list-group overflow-y-scroll" id="user_list" style="max-height: 30vh;">
@@ -114,13 +115,15 @@
                         </div>
                         <div class="mb-3">
                             <label for="group-description" class="col-form-label">Group description:</label>
-                            <textarea class="form-control" id="group-description" required></textarea>
+                            <textarea class="form-control" name="group_description" id="group_description" >You can leave this column</textarea>
                         </div>
+                        <input type="hidden" class="form-control" name="edit_status" value="false">
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="create_group_Submibtn">Create Group</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="modal_closeBtn">Close</button>
+                    <button type="button" class="btn btn-primary" id="model_submibtn">Create Group</button>
                 </div>
 
             </div>
