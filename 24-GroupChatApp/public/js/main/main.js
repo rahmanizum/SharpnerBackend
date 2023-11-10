@@ -3,7 +3,6 @@ $(document).ready(function () {
 });
 
 
-const chatContainer = document.getElementById("chat-container");
 const elements = {
     messageInput: message_form.querySelector('input[name="Message"]'),
     message_btn: message_form.querySelector('input[type="submit"]'),
@@ -52,6 +51,7 @@ function showChatOnScreen(chatHistory, userId) {
 
     })
     chat_body.innerHTML = messageText;
+    chat_container.scrollTop = chat_container.scrollHeight;
 }
 function searchUser(e) {
     const text = e.target.value.toLowerCase();
@@ -158,7 +158,6 @@ async function ShowCommonChats() {
         const userId = getUserResponse.data.userId
         localStorage.setItem("chatHistory", JSON.stringify(savingChats));
         showChatOnScreen(savingChats, userId)
-        chatContainer.scrollTop = chatContainer.scrollHeight;
 
     } catch (error) {
         console.log(error);
@@ -299,8 +298,6 @@ async function showGroupChat(e) {
                 const apiChats = APIresponse.data.chats
                 showChatOnScreen(apiChats, userId)
             }
-
-            chatContainer.scrollTop = chatContainer.scrollHeight;
         } else {
             console.log("no group id");
         }

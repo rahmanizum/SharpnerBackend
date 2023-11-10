@@ -45,8 +45,8 @@
         </div>
     </nav>
     <!--Main Contents-->
-    <section class="row w-100 h-100">
-        <div class="col-3 d-none d-lg-block pe-0 " style="min-height: 85vh;">
+    <section class="row w-100 h-100 d-none d-lg-flex">
+        <div class="col-3  pe-0 " style="min-height: 85vh;">
             <div class="me-2">
                 <div class="btn btn-light form-control rounded-3 " data-bs-toggle="modal"
                     data-bs-target="#create_group_model" aria-controls="create_group_model" id="create_groupBtn"> Create
@@ -69,7 +69,7 @@
                     <input type="submit" class="btn btn-primary  d-none" data-bs-toggle="modal"
                     data-bs-target="#create_group_model"  value=&#9998; id="0">
                 </div>
-                <div class="card overflow-y-scroll " style="height: 67vh;" id="chat-container">
+                <div class="card overflow-y-scroll " style="height: 67vh;" id="chat_container">
                     <div class="card-body flex-grow-0 container row pe-0" id="chat_body">
                     </div>
                 </div>
@@ -86,8 +86,12 @@
                 </div>
             </div>
         </div>
-
     </section>
+    <section class=" container-fluid text-center d-flex align-items-center justify-content-center d-lg-none d-flex" style="min-height:73vh ;">
+        <h5>
+            Work best with big screen , Use laptop or pc
+        </h5>
+      </section>
     <!--Models-->
     <div class="modal fade " data-bs-backdrop="static" data-bs-keyboard="false" id="create_group_model">
         <div class="modal-dialog modal-dialog-centered ">
