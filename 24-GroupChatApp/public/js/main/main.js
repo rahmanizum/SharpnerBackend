@@ -2,6 +2,21 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
+const socket = io("http://localhost:8080");
+socket.on('connect', () => {
+    console.log(`You are connected with id : ${socket.id}`);
+})
+socket.on('common-message', () => {
+    if (elements.message_btn.id == 0) {
+        ShowCommonChats();
+    }
+
+})
+socket.on('group-message', (groupId) => {
+    if (elements.message_btn.id == groupId) {
+        showGroupChats(groupId)
+    }
+})
 
 const elements = {
     messageInput: message_form.querySelector('input[name="Message"]'),
@@ -119,14 +134,12 @@ async function on_SendMessage(e) {
             await axios.post('user/post-message', data);
             message_form.reset();
             if (groupId == 0) {
+                socket.emit('new-common-message')
                 ShowCommonChats();
 
             } else {
-                const APIresponse = await axios(`user/get-group-messages?groupId=${groupId}`);
-                const apiChats = APIresponse.data.chats
-                const getUserResponse = await axios.get('/user/get-user');
-                const userId = getUserResponse.data.userId
-                showChatOnScreen(apiChats, userId)
+                socket.emit('new-group-message', groupId)
+                showGroupChats(groupId)
             }
 
 
@@ -163,6 +176,18 @@ async function ShowCommonChats() {
         console.log(error);
         alert(error.response.data.message);
         window.location = '/';
+    }
+}
+async function showGroupChats(groupId) {
+    try {
+        const APIresponse = await axios.get(`user/get-group-messages?groupId=${groupId}`);
+        const apiChats = APIresponse.data.chats
+        const getUserResponse = await axios.get('/user/get-user');
+        const userId = getUserResponse.data.userId
+        showChatOnScreen(apiChats, userId)
+    } catch (error) {
+        console.log(error);
+        alert(error.response.data.message);
     }
 }
 async function showingAllUser() {
@@ -262,8 +287,8 @@ async function createGroup(e) {
 
             } else {
                 const groupId = modelElements.editStatus.value
-                await axios.post(`user/update-group?groupId=${groupId}`,data);
-                
+                await axios.post(`user/update-group?groupId=${groupId}`, data);
+
                 model_submibtn.innerHTML = "Create Group";
                 model_heading.innerHTML = `Create new group`;
                 modelElements.editStatus.value = "false"
@@ -289,7 +314,7 @@ async function showGroupChat(e) {
         const groupId = e.target.id
         const getUserResponse = await axios.get('/user/get-user');
         const userId = getUserResponse.data.userId
-        if (groupId && groupId!="group_body") {
+        if (groupId && groupId != "group_body") {
             setupGroup(groupId, userId)
             if (groupId == 0) {
                 ShowCommonChats();

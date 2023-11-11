@@ -1,3 +1,7 @@
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+const { instrument } = require('@socket.io/admin-ui');
+
 const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
@@ -9,6 +13,8 @@ const Forgotpasswords = require('./models/forgot-password');
 const ChatHistory = require('./models/chat-history');
 const Groups = require("./models/groups");
 const GroupMember = require('./models/group-members');
+
+const websocketService = require('./services/websocket');
 
 const maninRoute = require('./routes/home');
 const userRoute = require('./routes/user');
@@ -28,6 +34,17 @@ app.use(cookieParser());
 app.use('/user',userRoute)
 app.use(maninRoute)
 
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: ["https://admin.socket.io",],
+    credentials: true
+  }
+});
+io.on('connection', websocketService )
+
+instrument(io, { auth: false })
+
 User.hasMany(Forgotpasswords);
 Forgotpasswords.belongsTo(User,{constraints:true,onDelete:'CASCADE'});
 User.hasMany(ChatHistory)
@@ -42,7 +59,7 @@ const PORT = process.env.PORT;
 async function initiate() {
     try {
      const res = await sequelize.sync();
-      app.listen(PORT, () => {
+      httpServer.listen(PORT, () => {
         console.log(`Server is running on port ${PORT} `);
       })
     } catch (err) {
