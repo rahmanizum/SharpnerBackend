@@ -34,3 +34,8 @@
         max-width: 90%;
         background-color: rgb(186, 201, 201); 
     }
+    .chat-image{
+        height: 10rem;
+        width: 14rem;
+        object-fit: cover;
+    }

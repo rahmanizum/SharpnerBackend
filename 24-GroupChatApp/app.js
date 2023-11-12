@@ -15,10 +15,11 @@ const Groups = require("./models/groups");
 const GroupMember = require('./models/group-members');
 
 const websocketService = require('./services/websocket');
+const cronService = require('./services/cron');
+cronService.job.start();
 
 const maninRoute = require('./routes/home');
 const userRoute = require('./routes/user');
-
 
 const app = express();
 app.use(cors({

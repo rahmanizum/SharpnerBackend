@@ -1,6 +1,7 @@
 const User = require('../models/users');
 const ChatHistory = require('../models/chat-history')
 const Group = require('../models/groups')
+const awsService = require('../services/awsservices');
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -100,7 +101,7 @@ exports.getAllChatHistory = async (request, response, next) => {
             where: {
                 GroupId: null,
                 id: {
-                    [Op.gt]: lastMessageId 
+                    [Op.gt]: lastMessageId
                 }
             }
         });
@@ -109,6 +110,7 @@ exports.getAllChatHistory = async (request, response, next) => {
             return {
                 messageId: ele.id,
                 message: ele.message,
+                isImage: ele.isImage,
                 name: user.name,
                 userId: user.id,
                 date_time: ele.date_time
@@ -123,7 +125,7 @@ exports.getAllChatHistory = async (request, response, next) => {
 }
 exports.getcurrentuser = async (request, response, next) => {
     const user = request.user;
-    response.json({ userId: user.id });
+    response.json({ userId: user.id ,user});
 }
 exports.getAlluser = async (request, response, next) => {
     try {
@@ -132,9 +134,9 @@ exports.getAlluser = async (request, response, next) => {
             attributes: ['id', 'name', 'imageUrl'],
             where: {
                 id: {
-                  [Op.not]: user.id
+                    [Op.not]: user.id
                 }
-              }
+            }
         });
         return response.status(200).json({ users, message: "All users succesfully fetched" })
 
@@ -219,6 +221,7 @@ exports.getGroupChatHistory = async (request, response, next) => {
             return {
                 messageId: ele.id,
                 message: ele.message,
+                isImage: ele.isImage,
                 name: user.name,
                 userId: user.id,
                 date_time: ele.date_time
@@ -260,14 +263,43 @@ exports.getGroupMembersbyId = async (request, response, next) => {
         const { groupId } = request.query;
         const group = await Group.findOne({ where: { id: Number(groupId) } });
         const AllusersData = await group.getUsers();
-        const users = AllusersData.map((ele)=>{
-            return{
-                id:ele.id,
-                name:ele.name,
+        const users = AllusersData.map((ele) => {
+            return {
+                id: ele.id,
+                name: ele.name,
             }
         })
-        
+
         response.status(200).json({ users, message: "Group members name succesfully fetched" })
+    } catch (error) {
+        console.log(error);
+        return response.status(500).json({ message: 'Internal Server error!' })
+    }
+}
+
+exports.saveChatImages = async (request, response, next) => {
+    try {
+        const user = request.user;
+        const image = request.file;
+        const { GroupId } = request.body;
+        const filename = `chat-images/group${GroupId}/user${user.id}/${Date.now()}_${image.originalname}`;
+        const imageUrl = await awsService.uploadToS3(image.buffer, filename)
+        console.log(imageUrl);
+        if (GroupId == 0) {
+            await user.createChatHistory({
+                message: imageUrl,
+                isImage: true
+            })
+        } else {
+            await user.createChatHistory({
+                message: imageUrl,
+                GroupId,
+                isImage: true
+            })
+        }
+
+        return response.status(200).json({ message: "image saved to database succesfully" })
+
     } catch (error) {
         console.log(error);
         return response.status(500).json({ message: 'Internal Server error!' })
